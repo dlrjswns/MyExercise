@@ -65,6 +65,9 @@ extension MainViewController: UICollectionViewDataSource {
         print("indexPath = \(indexPath.row)")
         let mockData = model[indexPath.row]
         cell.configureCell(with: mockData)
+        cell.delegate = self
+        cell.exerciseChartView.exerciseChartTableView.dataSource = self
+        cell.exerciseChartView.exerciseChartTableView.delegate = self
         return cell
     }
 }
@@ -78,4 +81,30 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2, height: view.frame.height/2)
     }
+}
+
+extension MainViewController: ExRecordCellDelegate {
+    func didTapLikeButton() {
+        print("Tapped Like Button")
+    }
+}
+
+extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: , for: <#T##IndexPath#>)
+        return UITableViewCell()
+    }
+    
+}
+
+extension MainViewController: UITableViewDelegate {
+    //
 }

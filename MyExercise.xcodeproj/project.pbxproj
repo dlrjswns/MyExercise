@@ -17,6 +17,8 @@
 		70BDDEB027FD2513009A4818 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEAF27FD2513009A4818 /* BaseView.swift */; };
 		70BDDEB227FD254D009A4818 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB127FD254D009A4818 /* MainView.swift */; };
 		70BDDEB527FD25ED009A4818 /* ExRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB427FD25ED009A4818 /* ExRecordCell.swift */; };
+		70BDDEB727FD6A20009A4818 /* ExChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB627FD6A20009A4818 /* ExChartView.swift */; };
+		70BDDEB927FD6C70009A4818 /* ExChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB827FD6C70009A4818 /* ExChartCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		70BDDEAF27FD2513009A4818 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		70BDDEB127FD254D009A4818 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		70BDDEB427FD25ED009A4818 /* ExRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExRecordCell.swift; sourceTree = "<group>"; };
+		70BDDEB627FD6A20009A4818 /* ExChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExChartView.swift; sourceTree = "<group>"; };
+		70BDDEB827FD6C70009A4818 /* ExChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExChartCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				70BDDEB327FD25D1009A4818 /* Cell */,
 				70BDDEAF27FD2513009A4818 /* BaseView.swift */,
 				70BDDEB127FD254D009A4818 /* MainView.swift */,
+				70BDDEB627FD6A20009A4818 /* ExChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				70BDDEB427FD25ED009A4818 /* ExRecordCell.swift */,
+				70BDDEB827FD6C70009A4818 /* ExChartCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -172,8 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70BDDEB727FD6A20009A4818 /* ExChartView.swift in Sources */,
 				70BDDE9427FD22A7009A4818 /* AppDelegate.swift in Sources */,
 				70BDDEB527FD25ED009A4818 /* ExRecordCell.swift in Sources */,
+				70BDDEB927FD6C70009A4818 /* ExChartCell.swift in Sources */,
 				70BDDEB227FD254D009A4818 /* MainView.swift in Sources */,
 				70BDDEAB27FD2338009A4818 /* BaseViewController.swift in Sources */,
 				70BDDE9627FD22A7009A4818 /* SceneDelegate.swift in Sources */,

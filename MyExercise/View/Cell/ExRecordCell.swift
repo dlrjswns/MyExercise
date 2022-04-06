@@ -20,9 +20,15 @@ enum ExerciseType: String {
     case shoulder = "Shoulder"
 }
 
+protocol ExRecordCellDelegate: AnyObject {
+    func didTapLikeButton()
+}
+
 class ExRecordCell: UICollectionViewCell {
     
     static let identifier = "ExRecordCell"
+    
+    weak var delegate: ExRecordCellDelegate?
     
     private let usernameLabel: UILabel = {
        let label = UILabel()
@@ -39,11 +45,13 @@ class ExRecordCell: UICollectionViewCell {
     private let likeButton: UIButton = {
        let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .semibold)
-        let image = UIImage(systemName: "heart", withConfiguration: config)
-
+        let image = UIImage(systemName: "heart", withConfiguration: config)?.withTintColor(.red, renderingMode: .alwaysOriginal)
         button.setBackgroundImage(image, for: .normal)
+        button.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         return button
     }()
+    
+    let exerciseChartView = ExChartView()
     
     //MARK: -init
     override init(frame: CGRect) {
@@ -61,9 +69,15 @@ class ExRecordCell: UICollectionViewCell {
         exerciseTypeLabel.text = nil
     }
     
+    //MARK: -Action
+    @objc private func didTapLikeButton() {
+        delegate?.didTapLikeButton()
+    }
+    
     //MARK: -Configure
     private func configureCell() {
-        contentView.backgroundColor = .systemPink
+        contentView.backgroundColor = .systemGray3
+        contentView.layer.cornerRadius = 20
         contentView.addSubview(usernameLabel)
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         usernameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
@@ -73,6 +87,11 @@ class ExRecordCell: UICollectionViewCell {
         exerciseTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         exerciseTypeLabel.leftAnchor.constraint(equalTo: usernameLabel.leftAnchor).isActive = true
         exerciseTypeLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 20).isActive = true
+        
+        contentView.addSubview(exerciseChartView)
+        exerciseChartView.translatesAutoresizingMaskIntoConstraints = false
+        exerciseChartView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        exerciseChartView.topAnchor.constraint(equalTo: exerciseTypeLabel.bottomAnchor, constant: 10).isActive = true
         
         contentView.addSubview(likeButton)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
