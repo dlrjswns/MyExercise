@@ -11,7 +11,9 @@ class MainViewController: BaseViewController {
     
     private let selfView = MainView()
     
-    private var model = [ExRecordData]()
+    private var exRecordModels = [ExRecordData]()
+    
+    private var exChartModels = [ExChartData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,8 @@ class MainViewController: BaseViewController {
         selfView.collectionView.register(ExRecordCell.self, forCellWithReuseIdentifier: ExRecordCell.identifier)
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
+        
+        
     }
     
     func createMockData() {
@@ -42,11 +46,47 @@ class MainViewController: BaseViewController {
         let exMockData3 = ExRecordData(username: "문진우", exerciseType: .leg)
         let exMockData4 = ExRecordData(username: "김규리", exerciseType: .shoulder)
         
-        model.append(exMockData)
-        model.append(exMockData1)
-        model.append(exMockData2)
-        model.append(exMockData3)
-        model.append(exMockData4)
+        exRecordModels.append(exMockData)
+        exRecordModels.append(exMockData1)
+        exRecordModels.append(exMockData2)
+        exRecordModels.append(exMockData3)
+        exRecordModels.append(exMockData4)
+        
+        exChartModels.append(ExChartData(
+            exerciseName: "",
+            exerciseType: DayExercise(chestExercise: [ChestExercise.chestBBPress],
+                                      backExercise: [BackExercise.BBRow, BackExercise.deadLift],
+                                      legExercise: nil,
+                                      shoulderExercise: nil,
+                                      armExercise: nil)))
+        exChartModels.append(ExChartData(
+            exerciseName: "",
+                                exerciseType: DayExercise(chestExercise: [ChestExercise.chestBBPress, ChestExercise.flyChest],
+                                      backExercise: [BackExercise.BBRow, BackExercise.deadLift],
+                                      legExercise: nil,
+                                      shoulderExercise: [ShoulderExercise.frontRaise],
+                                      armExercise: nil)))
+        exChartModels.append(ExChartData(
+            exerciseName: "",
+            exerciseType: DayExercise(chestExercise: [ChestExercise.chestBBPress],
+                                      backExercise: [BackExercise.BBRow, BackExercise.deadLift],
+                                      legExercise: nil,
+                                      shoulderExercise: nil,
+                                      armExercise: nil)))
+        exChartModels.append(ExChartData(
+            exerciseName: "",
+            exerciseType: DayExercise(chestExercise: [ChestExercise.chestBBPress],
+                                      backExercise: [BackExercise.BBRow, BackExercise.deadLift],
+                                      legExercise: nil,
+                                      shoulderExercise: nil,
+                                      armExercise: nil)))
+        exChartModels.append(ExChartData(
+            exerciseName: "",
+            exerciseType: DayExercise(chestExercise: [ChestExercise.chestBBPress],
+                                      backExercise: [BackExercise.BBRow, BackExercise.deadLift],
+                                      legExercise: nil,
+                                      shoulderExercise: nil,
+                                      armExercise: nil)))
     }
 }
 
@@ -57,13 +97,13 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.count
+        return exRecordModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExRecordCell.identifier, for: indexPath) as? ExRecordCell ?? ExRecordCell()
         print("indexPath = \(indexPath.row)")
-        let mockData = model[indexPath.row]
+        let mockData = exRecordModels[indexPath.row]
         cell.configureCell(with: mockData)
         cell.delegate = self
         cell.exerciseChartView.exerciseChartTableView.dataSource = self
@@ -95,12 +135,14 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return exChartModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: , for: <#T##IndexPath#>)
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExChartCell.identifier, for: indexPath) as? ExChartCell ?? ExChartCell()
+        let exchartData = exChartModels[indexPath.row]
+        cell.configureCell(with: exchartData)
+        return cell
     }
     
 }

@@ -33,12 +33,14 @@ class ExRecordCell: UICollectionViewCell {
     private let usernameLabel: UILabel = {
        let label = UILabel()
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
     
     private let exerciseTypeLabel: UILabel = {
        let label = UILabel()
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
@@ -88,15 +90,19 @@ class ExRecordCell: UICollectionViewCell {
         exerciseTypeLabel.leftAnchor.constraint(equalTo: usernameLabel.leftAnchor).isActive = true
         exerciseTypeLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 20).isActive = true
         
-        contentView.addSubview(exerciseChartView)
-        exerciseChartView.translatesAutoresizingMaskIntoConstraints = false
-        exerciseChartView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        exerciseChartView.topAnchor.constraint(equalTo: exerciseTypeLabel.bottomAnchor, constant: 10).isActive = true
-        
         contentView.addSubview(likeButton)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        
+        contentView.addSubview(exerciseChartView)
+        exerciseChartView.translatesAutoresizingMaskIntoConstraints = false
+        exerciseChartView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        exerciseChartView.topAnchor.constraint(equalTo: exerciseTypeLabel.bottomAnchor, constant: 10).isActive = true
+        exerciseChartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
+        exerciseChartView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        exerciseChartView.bottomAnchor.constraint(equalTo: likeButton.topAnchor, constant: -10).isActive = true
+        exerciseChartView.exerciseChartTableView.register(ExChartCell.self, forCellReuseIdentifier: ExChartCell.identifier)
     }
     
     public func configureCell(with model: ExRecordData) {
