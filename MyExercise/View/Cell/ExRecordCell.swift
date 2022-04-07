@@ -32,6 +32,8 @@ class ExRecordCell: UICollectionViewCell {
     
     private var exRecordModel: ExRecordData?
     
+    private var isLiked: Bool = false
+    
     weak var delegate: ExRecordCellDelegate?
     
     private let usernameLabel: UILabel = {
@@ -73,17 +75,31 @@ class ExRecordCell: UICollectionViewCell {
         super.prepareForReuse()
         usernameLabel.text = nil
         exerciseDateLabel.text = nil
+//        likeButton.setBackgroundImage(nil, for: .normal)
     }
     
     //MARK: -Action
     @objc private func didTapLikeButton() {
-        print("dtdsdfsdf")
         guard let exRecordModel = exRecordModel else {
-            print("dtd?")
             return
         }
-        print("dtdsdfsdf")
         delegate?.didTapLikeButton(with: exRecordModel)
+        likeButtonImageToggle()
+    }
+    
+    private func likeButtonImageToggle() {
+        if isLiked == false {
+            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .semibold)
+            let image = UIImage(systemName: "heart.fill", withConfiguration: config)?.withTintColor(.red, renderingMode: .alwaysOriginal)
+            likeButton.setBackgroundImage(image, for: .normal)
+            isLiked = true
+        }
+        else {
+            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .semibold)
+            let image = UIImage(systemName: "heart", withConfiguration: config)?.withTintColor(.red, renderingMode: .alwaysOriginal)
+            likeButton.setBackgroundImage(image, for: .normal)
+            isLiked = false
+        }
     }
     
     private func addAction() {
@@ -92,6 +108,7 @@ class ExRecordCell: UICollectionViewCell {
     
     //MARK: -Configure
     private func configureCell() {
+        
         contentView.backgroundColor = .systemGray3
         contentView.layer.cornerRadius = 20
         contentView.addSubview(usernameLabel)

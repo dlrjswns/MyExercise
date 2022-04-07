@@ -7,13 +7,21 @@
 
 import UIKit
 
-class MainViewController: BaseViewController {
+protocol MainVCSendDataDelegate: AnyObject {
+    func sendLikedData(with model: ExRecordData)
+}
+
+class HomeViewController: BaseViewController {
     
     private let selfView = MainView()
     
     private var exRecordModels = [ExRecordData]()
     
     private var exChartModels = [ExChartData]()
+    
+    private var likedModels = [ExRecordData]()
+    
+    weak var delegate: MainVCSendDataDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +48,26 @@ class MainViewController: BaseViewController {
     }
     
     func createMockData() {
-        let exMockData = ExRecordData(username: "이건준", exerciseType: .chest, exerciseDate: Date().fetchDateToString())
-        let exMockData1 = ExRecordData(username: "신범철", exerciseType: .back, exerciseDate: Date().fetchDateToString())
-        let exMockData2 = ExRecordData(username: "이상준", exerciseType: .arm, exerciseDate: Date().fetchDateToString())
-        let exMockData3 = ExRecordData(username: "문진우", exerciseType: .leg, exerciseDate: Date().fetchDateToString())
-        let exMockData4 = ExRecordData(username: "김규리", exerciseType: .shoulder, exerciseDate: Date().fetchDateToString())
+        let exMockData = ExRecordData(username: "이건준",
+                                      exerciseType: .chest,
+                                      exerciseDate: Date().fetchDateToString(),
+                                      dayExercise: DayExercise(chestExercise: [ChestExercise.chestBBPress], backExercise: nil, legExercise: nil, shoulderExercise: nil, armExercise: [ArmExercise.oneArmBBCurl, ArmExercise.cablePushDown]))
+        let exMockData1 = ExRecordData(username: "신범철",
+                                       exerciseType: .back,
+                                       exerciseDate: Date().fetchDateToString(),
+                                       dayExercise: DayExercise(chestExercise: [ChestExercise.chestBBPress], backExercise: [BackExercise.BBRow], legExercise: nil, shoulderExercise: nil, armExercise: [ArmExercise.oneArmBBCurl, ArmExercise.cablePushDown]))
+        let exMockData2 = ExRecordData(username: "이상준",
+                                       exerciseType: .arm,
+                                       exerciseDate: Date().fetchDateToString(),
+                                       dayExercise: DayExercise(chestExercise: [ChestExercise.chestBBPress], backExercise: nil, legExercise: nil, shoulderExercise: nil, armExercise: [ArmExercise.oneArmBBCurl, ArmExercise.cablePushDown]))
+        let exMockData3 = ExRecordData(username: "문진우",
+                                       exerciseType: .leg,
+                                       exerciseDate: Date().fetchDateToString(),
+                                       dayExercise: DayExercise(chestExercise: [ChestExercise.chestBBPress], backExercise: nil, legExercise: nil, shoulderExercise: nil, armExercise: [ArmExercise.oneArmBBCurl, ArmExercise.cablePushDown]))
+        let exMockData4 = ExRecordData(username: "김규리",
+                                       exerciseType: .shoulder,
+                                       exerciseDate: Date().fetchDateToString(),
+                                       dayExercise: DayExercise(chestExercise: [ChestExercise.chestBBPress], backExercise: nil, legExercise: nil, shoulderExercise: nil, armExercise: [ArmExercise.oneArmBBCurl, ArmExercise.cablePushDown]))
         
         exRecordModels.append(exMockData)
         exRecordModels.append(exMockData1)
@@ -91,7 +114,7 @@ class MainViewController: BaseViewController {
 }
 
 //MARK: -UICollectionViewDataSource
-extension MainViewController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -113,26 +136,28 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 //MARK: -UICollectionViewDelegate
-extension MainViewController: UICollectionViewDelegate {
-    //
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
 }
 
-extension MainViewController: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2, height: view.frame.height/2)
     }
 }
 
-extension MainViewController: ExRecordCellDelegate {
+extension HomeViewController: ExRecordCellDelegate {
     func didTapLikeButton(with model: ExRecordData) {
         print("model = \(model)")
-        let likeModel = model
-        let vc = LikeListController(likeModel: likeModel)
+        likedModels.append(model)
+        let vc = LikeListController(likeModels: likedModels)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension MainViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -150,7 +175,7 @@ extension MainViewController: UITableViewDataSource {
     
 }
 
-extension MainViewController: UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }

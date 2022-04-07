@@ -13,7 +13,7 @@
 		70BDDEA027FD22A8009A4818 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70BDDE9E27FD22A8009A4818 /* LaunchScreen.storyboard */; };
 		70BDDEA927FD22DB009A4818 /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEA827FD22DB009A4818 /* MainTabbarController.swift */; };
 		70BDDEAB27FD2338009A4818 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEAA27FD2338009A4818 /* BaseViewController.swift */; };
-		70BDDEAD27FD24C8009A4818 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEAC27FD24C8009A4818 /* MainViewController.swift */; };
+		70BDDEAD27FD24C8009A4818 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEAC27FD24C8009A4818 /* HomeViewController.swift */; };
 		70BDDEB027FD2513009A4818 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEAF27FD2513009A4818 /* BaseView.swift */; };
 		70BDDEB227FD254D009A4818 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB127FD254D009A4818 /* MainView.swift */; };
 		70BDDEB527FD25ED009A4818 /* ExRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDDEB427FD25ED009A4818 /* ExRecordCell.swift */; };
@@ -34,7 +34,7 @@
 		70BDDEA127FD22A8009A4818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70BDDEA827FD22DB009A4818 /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		70BDDEAA27FD2338009A4818 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		70BDDEAC27FD24C8009A4818 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		70BDDEAC27FD24C8009A4818 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		70BDDEAF27FD2513009A4818 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		70BDDEB127FD254D009A4818 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		70BDDEB427FD25ED009A4818 /* ExRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExRecordCell.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			children = (
 				70BDDEA827FD22DB009A4818 /* MainTabbarController.swift */,
 				70BDDEAA27FD2338009A4818 /* BaseViewController.swift */,
-				70BDDEAC27FD24C8009A4818 /* MainViewController.swift */,
+				70BDDEAC27FD24C8009A4818 /* HomeViewController.swift */,
 				70BDDEBA27FEA21A009A4818 /* LikeListController.swift */,
 			);
 			path = Controller;
@@ -211,7 +211,7 @@
 				70BDDE9627FD22A7009A4818 /* SceneDelegate.swift in Sources */,
 				70BDDEB027FD2513009A4818 /* BaseView.swift in Sources */,
 				70BDDEA927FD22DB009A4818 /* MainTabbarController.swift in Sources */,
-				70BDDEAD27FD24C8009A4818 /* MainViewController.swift in Sources */,
+				70BDDEAD27FD24C8009A4818 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

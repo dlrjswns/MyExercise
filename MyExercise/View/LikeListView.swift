@@ -11,6 +11,7 @@ class LikeListView: BaseView {
     
     let tableView: UITableView = {
        let tableView = UITableView()
+        tableView.backgroundColor = .systemBackground
         return tableView
     }()
     
@@ -20,5 +21,14 @@ class LikeListView: BaseView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureUI() {
+        addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
