@@ -40,11 +40,11 @@ class MainViewController: BaseViewController {
     }
     
     func createMockData() {
-        let exMockData = ExRecordData(username: "이건준", exerciseType: .chest)
-        let exMockData1 = ExRecordData(username: "신범철", exerciseType: .back)
-        let exMockData2 = ExRecordData(username: "이상준", exerciseType: .arm)
-        let exMockData3 = ExRecordData(username: "문진우", exerciseType: .leg)
-        let exMockData4 = ExRecordData(username: "김규리", exerciseType: .shoulder)
+        let exMockData = ExRecordData(username: "이건준", exerciseType: .chest, exerciseDate: Date().fetchDateToString())
+        let exMockData1 = ExRecordData(username: "신범철", exerciseType: .back, exerciseDate: Date().fetchDateToString())
+        let exMockData2 = ExRecordData(username: "이상준", exerciseType: .arm, exerciseDate: Date().fetchDateToString())
+        let exMockData3 = ExRecordData(username: "문진우", exerciseType: .leg, exerciseDate: Date().fetchDateToString())
+        let exMockData4 = ExRecordData(username: "김규리", exerciseType: .shoulder, exerciseDate: Date().fetchDateToString())
         
         exRecordModels.append(exMockData)
         exRecordModels.append(exMockData1)
@@ -124,8 +124,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension MainViewController: ExRecordCellDelegate {
-    func didTapLikeButton() {
-        print("Tapped Like Button")
+    func didTapLikeButton(with model: ExRecordData) {
+        print("model = \(model)")
+        let likeModel = model
+        let vc = LikeListController(likeModel: likeModel)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -148,5 +151,7 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
-    //
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

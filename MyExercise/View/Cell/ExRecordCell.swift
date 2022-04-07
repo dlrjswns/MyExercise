@@ -10,6 +10,8 @@ import UIKit
 struct ExRecordData {
     let username: String
     let exerciseType: ExerciseType
+    let exerciseDate: String
+    let dayExercise: DayExercise
 }
 
 enum ExerciseType: String {
@@ -21,12 +23,14 @@ enum ExerciseType: String {
 }
 
 protocol ExRecordCellDelegate: AnyObject {
-    func didTapLikeButton()
+    func didTapLikeButton(with model: ExRecordData)
 }
 
 class ExRecordCell: UICollectionViewCell {
     
     static let identifier = "ExRecordCell"
+    
+    private var exRecordModel: ExRecordData?
     
     weak var delegate: ExRecordCellDelegate?
     
@@ -37,7 +41,7 @@ class ExRecordCell: UICollectionViewCell {
         return label
     }()
     
-    private let exerciseTypeLabel: UILabel = {
+    private let exerciseDateLabel: UILabel = {
        let label = UILabel()
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -49,7 +53,6 @@ class ExRecordCell: UICollectionViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .semibold)
         let image = UIImage(systemName: "heart", withConfiguration: config)?.withTintColor(.red, renderingMode: .alwaysOriginal)
         button.setBackgroundImage(image, for: .normal)
-        button.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         return button
     }()
     
@@ -59,6 +62,7 @@ class ExRecordCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureCell()
+        addAction()
     }
     
     required init?(coder: NSCoder) {
@@ -68,12 +72,22 @@ class ExRecordCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         usernameLabel.text = nil
-        exerciseTypeLabel.text = nil
+        exerciseDateLabel.text = nil
     }
     
     //MARK: -Action
     @objc private func didTapLikeButton() {
-        delegate?.didTapLikeButton()
+        print("dtdsdfsdf")
+        guard let exRecordModel = exRecordModel else {
+            print("dtd?")
+            return
+        }
+        print("dtdsdfsdf")
+        delegate?.didTapLikeButton(with: exRecordModel)
+    }
+    
+    private func addAction() {
+        likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
     }
     
     //MARK: -Configure
@@ -85,10 +99,10 @@ class ExRecordCell: UICollectionViewCell {
         usernameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         usernameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         
-        contentView.addSubview(exerciseTypeLabel)
-        exerciseTypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        exerciseTypeLabel.leftAnchor.constraint(equalTo: usernameLabel.leftAnchor).isActive = true
-        exerciseTypeLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 20).isActive = true
+        contentView.addSubview(exerciseDateLabel)
+        exerciseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        exerciseDateLabel.leftAnchor.constraint(equalTo: usernameLabel.leftAnchor).isActive = true
+        exerciseDateLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 20).isActive = true
         
         contentView.addSubview(likeButton)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +112,7 @@ class ExRecordCell: UICollectionViewCell {
         contentView.addSubview(exerciseChartView)
         exerciseChartView.translatesAutoresizingMaskIntoConstraints = false
         exerciseChartView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        exerciseChartView.topAnchor.constraint(equalTo: exerciseTypeLabel.bottomAnchor, constant: 10).isActive = true
+        exerciseChartView.topAnchor.constraint(equalTo: exerciseDateLabel.bottomAnchor, constant: 10).isActive = true
         exerciseChartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         exerciseChartView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         exerciseChartView.bottomAnchor.constraint(equalTo: likeButton.topAnchor, constant: -10).isActive = true
@@ -107,17 +121,19 @@ class ExRecordCell: UICollectionViewCell {
     
     public func configureCell(with model: ExRecordData) {
         usernameLabel.text = model.username
-        switch model.exerciseType {
-            case .chest:
-                exerciseTypeLabel.text = ExerciseType.chest.rawValue
-            case .back:
-                exerciseTypeLabel.text = ExerciseType.back.rawValue
-            case .arm:
-                exerciseTypeLabel.text = ExerciseType.arm.rawValue
-            case .leg:
-                exerciseTypeLabel.text = ExerciseType.leg.rawValue
-            case .shoulder:
-                exerciseTypeLabel.text = ExerciseType.shoulder.rawValue
-        }
+        exerciseDateLabel.text = model.exerciseDate
+        self.exRecordModel = model
+//        switch model.exerciseType {
+//            case .chest:
+//                exerciseDateLabel.text = ExerciseType.chest.rawValue
+//            case .back:
+//                exerciseDateLabel.text = ExerciseType.back.rawValue
+//            case .arm:
+//                exerciseDateLabel.text = ExerciseType.arm.rawValue
+//            case .leg:
+//                exerciseDateLabel.text = ExerciseType.leg.rawValue
+//            case .shoulder:
+//                exerciseDateLabel.text = ExerciseType.shoulder.rawValue
+//        }
     }
 }
