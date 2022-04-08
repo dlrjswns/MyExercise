@@ -16,6 +16,7 @@ class LikeListController: BaseViewController {
     //MARK: -Init
     init(likeModels: [ExRecordData]) {
         self.likeModels = likeModels
+        print("likeModels = \(likeModels)")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,17 +54,24 @@ extension LikeListController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let likedDayExercise = likeModels.map { exRecordData in
+        let likedDayExercises = likeModels.map { exRecordData in
             return exRecordData.dayExercise
         }
-        countUseableExercise(likedDayExercise: likedDayExercise) //likeModels가 가지고있는 dayExercise가 배열이 아니라 구조체임
-        return likedDayExercise.count
+        let likedDayExercise = likedDayExercises[section]//likeModels가 가지고있는 dayExercise가 배열이 아니라 구조체임
+        print("likedModel = \(likedDayExercise)")
+        print("count = \(countUseableExercise(likedDayExercise: likedDayExercise))")
+        return countUseableExercise(likedDayExercise: likedDayExercise)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExLikeListCell.identifier, for: indexPath) as? ExLikeListCell ?? ExLikeListCell()
-        let exRecordData = likeModels[indexPath.row]
-        cell.configureCell(with: exRecordData)
+        print("indexPath = \(indexPath.row)")
+        let likedDayExercises = likeModels.map { exRecordData in
+            return exRecordData.dayExercise
+        }
+        let likedDayExercise = likedDayExercises[indexPath.section] // DayExercise
+        
+        cell.configureCell(with: likedDayExercise)
         return cell
     }
     
@@ -79,9 +87,48 @@ extension LikeListController: UITableViewDataSource {
         return likedExerciseDays[section] + " \(likedUserName[section])"
     }
     
-    private func countUseableExercise(likedDayExercise: [DayExercise]) {
-        for x in 0..<likedDayExercise.count {
-            
+    private func countUseableExercise(likedDayExercise: DayExercise) -> Int { //DayExercise중 데이터가 존재하는 운동만 count
+        var count = 0
+        if let chestExercises = likedDayExercise.chestExercise {
+            print("chest")
+            count += chestExercises.count
         }
+        if let backExercises = likedDayExercise.backExercise {
+            print("back")
+            count += backExercises.count
+        }
+        if let shoulderExercises = likedDayExercise.shoulderExercise {
+            print("shoulder")
+            count += shoulderExercises.count
+        }
+        if let armExercises = likedDayExercise.armExercise {
+            print("arm")
+            count += armExercises.count
+        }
+        if let legExercises = likedDayExercise.legExercise {
+            print("leg")
+            count += legExercises.count
+        }
+        
+            return count
+//        let dayExerciseCount = likedDayExercise.map { dayExercise -> Int in
+//            if let chestExercises = dayExercise.chestExercise {
+//                return chestExercises.count
+//            }
+//            else if let backExercises = dayExercise.backExercise {
+//                return backExercises.count
+//            }
+//            else if let shoulderExercises = dayExercise.shoulderExercise {
+//                return shoulderExercises.count
+//            }
+//            else if let armExercises = dayExercise.armExercise {
+//                return armExercises.count
+//            }
+//            else if let legExercises = dayExercise.legExercise {
+//                return legExercises.count
+//            }
+//            return 0
+//        }
+//        return dayExerciseCount
     }
 }

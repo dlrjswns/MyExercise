@@ -42,8 +42,9 @@ class ExLikeListCell: UITableViewCell {
         dayExerciseLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
     
-    public func configureCell(with model: ExRecordData) {
-        if let armExercises = model.dayExercise.armExercise {
+    public func configureCell(with model: DayExercise) { // 일단 model은 잘 들어옴
+        print("mmmm = \(model)")
+        if let armExercises = model.armExercise {
             //Arm exercise
             _ = armExercises.map { armExercise in
                 dayExerciseLabel.text = armExercise.rawValue
@@ -51,7 +52,7 @@ class ExLikeListCell: UITableViewCell {
             return
         }
         
-        if let shoulderExercises = model.dayExercise.shoulderExercise {
+        if let shoulderExercises = model.shoulderExercise {
             //Shoulder exercise
             _ = shoulderExercises.map { shoulderExercise in
                 dayExerciseLabel.text = shoulderExercise.rawValue
@@ -59,7 +60,7 @@ class ExLikeListCell: UITableViewCell {
             return
         }
         
-        if let backExercises = model.dayExercise.backExercise {
+        if let backExercises = model.backExercise {
             //Back exercise
             _ = backExercises.map { backExercise in
                 dayExerciseLabel.text = backExercise.rawValue
@@ -67,7 +68,7 @@ class ExLikeListCell: UITableViewCell {
             return
         }
         
-        if let chestExercises = model.dayExercise.chestExercise {
+        if let chestExercises = model.chestExercise {
             //Chest exercise
             _ = chestExercises.map { chestExercise in
                 dayExerciseLabel.text = chestExercise.rawValue
@@ -75,7 +76,7 @@ class ExLikeListCell: UITableViewCell {
             return
         }
         
-        if let legExercises = model.dayExercise.legExercise {
+        if let legExercises = model.legExercise {
             //Leg exercise
             _ = legExercises.map { legExercise in
                 dayExerciseLabel.text = legExercise.rawValue
