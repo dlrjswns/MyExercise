@@ -28,6 +28,7 @@ class LikeListController: BaseViewController {
         super.viewDidLoad()
     }
     
+    
     override func configureUI() {
         view.addSubview(selfView)
         selfView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +88,10 @@ extension LikeListController: UITableViewDataSource {
         return likedExerciseDays[section] + " \(likedUserName[section])"
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
+    }
+    
     private func countUseableExercise(likedDayExercise: DayExercise) -> Int { //DayExercise중 데이터가 존재하는 운동만 count
         var count = 0
         if let chestExercises = likedDayExercise.chestExercise {
@@ -111,24 +116,5 @@ extension LikeListController: UITableViewDataSource {
         }
         
             return count
-//        let dayExerciseCount = likedDayExercise.map { dayExercise -> Int in
-//            if let chestExercises = dayExercise.chestExercise {
-//                return chestExercises.count
-//            }
-//            else if let backExercises = dayExercise.backExercise {
-//                return backExercises.count
-//            }
-//            else if let shoulderExercises = dayExercise.shoulderExercise {
-//                return shoulderExercises.count
-//            }
-//            else if let armExercises = dayExercise.armExercise {
-//                return armExercises.count
-//            }
-//            else if let legExercises = dayExercise.legExercise {
-//                return legExercises.count
-//            }
-//            return 0
-//        }
-//        return dayExerciseCount
     }
 }

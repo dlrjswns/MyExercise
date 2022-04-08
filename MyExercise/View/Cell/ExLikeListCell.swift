@@ -14,6 +14,35 @@ class ExLikeListCell: UITableViewCell {
     private let dayExerciseLabel: UILabel = {
        let label = UILabel()
         label.textColor = .label
+        label.text = "dfdf"
+        return label
+    }()
+    
+    private let dayExerciseLabel1: UILabel = {
+       let label = UILabel()
+        label.textColor = .label
+        label.text = "dfdf"
+        return label
+    }()
+    
+    private let dayExerciseLabel2: UILabel = {
+       let label = UILabel()
+        label.textColor = .label
+        label.text = "dfdf"
+        return label
+    }()
+    
+    private let dayExerciseLabel3: UILabel = {
+       let label = UILabel()
+        label.textColor = .label
+        label.text = "dfdf"
+        return label
+    }()
+    
+    private let dayExerciseLabel4: UILabel = {
+       let label = UILabel()
+        label.textColor = .label
+        label.text = "dfdf"
         return label
     }()
     
@@ -32,14 +61,51 @@ class ExLikeListCell: UITableViewCell {
        
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        print("contentViewFrame = \(contentView.frame.height/6)")
+        dayExerciseLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayExerciseLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        dayExerciseLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
+        
+        dayExerciseLabel1.translatesAutoresizingMaskIntoConstraints = false
+        dayExerciseLabel1.topAnchor.constraint(equalTo: dayExerciseLabel.bottomAnchor, constant: 30).isActive = true
+        dayExerciseLabel1.leftAnchor.constraint(equalTo: dayExerciseLabel.leftAnchor).isActive = true
+        
+        dayExerciseLabel2.translatesAutoresizingMaskIntoConstraints = false
+        dayExerciseLabel2.topAnchor.constraint(equalTo: dayExerciseLabel1.bottomAnchor, constant: 30).isActive = true
+        dayExerciseLabel2.leftAnchor.constraint(equalTo: dayExerciseLabel1.leftAnchor).isActive = true
+        
+        dayExerciseLabel3.translatesAutoresizingMaskIntoConstraints = false
+        dayExerciseLabel3.topAnchor.constraint(equalTo: dayExerciseLabel2.bottomAnchor, constant: 30).isActive = true
+        dayExerciseLabel3.leftAnchor.constraint(equalTo: dayExerciseLabel2.leftAnchor).isActive = true
+        
+        dayExerciseLabel4.translatesAutoresizingMaskIntoConstraints = false
+        dayExerciseLabel4.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30).isActive = true
+        dayExerciseLabel4.leftAnchor.constraint(equalTo: dayExerciseLabel3.leftAnchor).isActive = true
+//        dayExerciseLabel4.topAnchor.constraint(equalTo: dayExerciseLabel3.bottomAnchor, constant: contentView.frame.height/6).isActive = true
+        
+    }
+    
     //MARK: -Configure
     private func configureCell() {
         self.accessoryType = .disclosureIndicator
-        
+//        print("contentViewFrame = \(contentView.frame)")
         contentView.addSubview(dayExerciseLabel)
-        dayExerciseLabel.translatesAutoresizingMaskIntoConstraints = false
-        dayExerciseLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        dayExerciseLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
+        
+        
+        contentView.addSubview(dayExerciseLabel1)
+       
+        
+        contentView.addSubview(dayExerciseLabel2)
+       
+        
+        contentView.addSubview(dayExerciseLabel3)
+    
+        
+        contentView.addSubview(dayExerciseLabel4)
+        
+        
     }
     
     public func configureCell(with model: DayExercise) { // 일단 model은 잘 들어옴
